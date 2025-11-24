@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Login</title></head>
+<body>
+<div th:replace="~{layout}">
+    <div th:fragment="content" class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center"><h4>Customer Login</h4></div>
+                <div class="card-body">
+                    <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <label>Username</label>
+                            <input name="username" class="form-control" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label>Password</label>
+                            <input name="password" type="password" class="form-control" required/>
+                        </div>
+                        <button class="btn btn-primary w-100">Sign In</button>
+                    </form>
+                    <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}">Error</div>
+                    <p class="text-center mt-3 text-muted small">
+                        Try: <code>admin'--</code> (any password) or <code>alice / pass123</code>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
