@@ -1,0 +1,52 @@
+-- Drop tables if you want a completely fresh start (optional)
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS customers CASCADE;
+
+-- Users table
+CREATE TABLE customers (
+                           id SERIAL PRIMARY KEY,
+                           username VARCHAR(50) UNIQUE NOT NULL,
+                           password VARCHAR(255) NOT NULL,
+                           full_name VARCHAR(100),
+                           email VARCHAR(100),
+                           role VARCHAR(20) DEFAULT 'USER'
+);
+
+-- Products table
+CREATE TABLE products (
+                          id SERIAL PRIMARY KEY,
+                          name VARCHAR(200) NOT NULL,
+                          price DECIMAL(10,2) NOT NULL,
+                          description TEXT
+);
+
+-- Fresh, original test users
+INSERT INTO customers (username, password, full_name, email, role) VALUES
+                                                                       ('neo',        'trinity2025',   'Thomas Anderson',      'admin@matrix.local',      'ADMIN'),
+                                                                       ('sarah',      'Sari!',     'Sarah Timelska',         'sarah.t@mail.org',    'USER'),
+                                                                       ('johnwick',   'pencil123',     'John Wick',            'john@continental.nyc',  'USER'),
+                                                                       ('walter',     'heisenberg',    'Walter White',         'heisenberg@abq.edu',    'USER')
+ON CONFLICT (username) DO NOTHING;
+
+-- Generic products (multiple items of the same type so you can test filtering/grouping)
+INSERT INTO products (name, price, description) VALUES
+                                                    ('Claw Hammer 16oz',          24.90, 'Fiberglass handle, curved claw'),
+                                                    ('Ball-Pein Hammer 24oz',     32.50, 'Drop-forged steel, wooden handle'),
+                                                    ('Flathead Screwdriver 6mm',   8.90, 'Magnetic tip, 150mm shaft'),
+                                                    ('Phillips Screwdriver PH2',   9.50, 'Magnetic tip, 200mm shaft'),
+                                                    ('Adjustable Wrench 8"',      18.70, 'Chrome vanadium steel'),
+                                                    ('Adjustable Wrench 12"',     28.90, 'Chrome vanadium steel'),
+                                                    ('Cordless Drill 18V',       119.00, 'Brushless motor, 2 batteries'),
+                                                    ('Cordless Drill 21V',       149.00, 'Higher torque model'),
+                                                    ('Safety Goggles Clear',       6.50, 'Anti-fog, impact resistant'),
+                                                    ('Work Gloves Leather L',     14.90, 'Reinforced palm'),
+                                                    ('Work Gloves Leather XL',    15.90, 'Same model, larger size'),
+                                                    ('Duct Tape Silver 50m',      7.90, 'Heavy duty'),
+                                                    ('Measuring Tape 5m',         11.50, 'Auto-lock, rubberized case'),
+                                                    ('Measuring Tape 8m',         16.80, 'Same series, longer'),
+                                                    ('LED Flashlight 1000lm',     29.90, 'Rechargeable, zoomable'),
+                                                    ('LED Headlamp 800lm',        24.50, 'Hands-free, red light mode'),
+                                                    ('Extension Cord 10m',        19.90, '3 outlets, outdoor rated'),
+                                                    ('Paint Brush Set 5pcs',      12.90, 'Synthetic bristles'),
+                                                    ('Roller Paint Tray Set',     18.50, '9-inch roller + tray')
+
